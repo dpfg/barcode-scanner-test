@@ -23,7 +23,7 @@
           code +
           " - " +
           key;
-        logEl.insertBefore(entryEl);
+        logEl.innerHTML = logEl.innerHTML + entryEl.outerHTML;
       }
 
       function makeOn(source) {
