@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BarCode Scanner Test</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <h3>Barcode scanner test</h3>
+    <div id="log"></div>
+
+    <script>
+      function appendLog(source, event) {
+        var key = event.key,
+          code = event.keyCode;
+        var logEl = document.getElementById("log");
+        var entryEl = document.createElement("div");
+        entryEl.innerHTML =
+          new Date().toLocaleTimeString() +
+          ": " +
+          source +
+          " " +
+          code +
+          " - " +
+          key;
+        logEl.append(entryEl);
+      }
+
+      function makeOn(source) {
+        return function onEvent(event) {
+          appendLog(source, event);
+          event.preventDefault();
+          event.stopPropagation();
+        };
+      }
+
+      document.getElementById("log").innerHTML = "Init log";
+
+      document.onkeydown = makeOn("onkeydown");
+      document.onkeyup = makeOn("onkeyup");
+      document.onkeypress = makeOn("onkeypress");
+      document.onclick = makeOn("onclick");
+      document.oninput = makeOn("oninput");
+      document.onplay = makeOn("onplay");
+      document.onpause = makeOn("onpause");
+      document.onseeked = makeOn("onseeked");
+      document.onseeking = makeOn("onseeking");
+    </script>
+  </body>
+</html>
